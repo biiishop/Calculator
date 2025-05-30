@@ -1,4 +1,25 @@
-e = (1 + 1/99999) ** 99999
+def e(x): 
+    sum = 0
+    current_factorial = 1
+    for i in range(10000000):
+        if i > 0:
+            current_factorial *= i
+        term = (x ** i) / current_factorial
+        sum += term
+    return sum
+
+
+print (e(1))
+print (e(10))
+print( e(100) )
+
+def atanpi(x):
+  return  (x - x**3 / 3 + x**5 / 5 - x**7 / 7 + x**9 / 9 -
+              x**11 / 11 + x**13 / 13 - x**15 / 15 +
+              x**17 / 17 - x**19 / 19 + x**21 / 21)
+
+pi = 4 * (4 * atanpi(1/5) - atanpi(1/239))
+print(pi)
 
 def abs(x):
   if x < 0:
@@ -98,5 +119,41 @@ def acot(x):
     return pi
   return pi / 2 - atan(x)
 
-pi = 4 * (4 * atan(1/5) - atan(1/239))
-print(pi)
+def derivative(func, x):
+  h = 1e-8
+  return (func(x + h) - func(x)) / h
+
+def riemann_sum(func, a, b, step_size, mode):
+  sum = 0
+  match mode:
+    case "left":
+      while a < b:
+        sum += func(a) * step_size
+        a += step_size
+    case "right":
+      a += step_size
+      while a < b:
+        sum += func(a) * step_size
+        a += step_size
+    case "middle":
+      while a < b:
+        a += step_size
+        sum += func(a + step_size / 2) * step_size
+    case "trap":
+      while a < b:
+        sum += (func(a) + func(a+step_size))/2 * step_size
+        # a += 
+
+    case _:
+      raise ValueError("Invalid mode")
+
+def ln(x):
+  if x == 0:
+    return(1)
+  if x < 0:
+    raise ValueError("Log of negative number DNE")
+  
+    
+
+# def integral(func, a, b):
+#   return 

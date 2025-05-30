@@ -100,3 +100,15 @@ def acot(x):
 
 pi = 4 * (4 * atan(1/5) - atan(1/239))
 print(pi)
+
+{
+	"folders": [],
+	"settings": {
+		"extensions.ignoreRecommendations": true,
+		"files.autoSave": "off",
+		"typescript.tsc.autoDetect": "off",
+		"npm.autoDetect": "off",
+		"debug.allowBreakpointsEverywhere": true,
+		"html.autoClosingTags": false
+	}
+}

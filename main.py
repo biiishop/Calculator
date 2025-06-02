@@ -1,25 +1,27 @@
-def e(x): 
+from pprint import pp
+
+def e(x):
     sum = 0
     current_factorial = 1
-    for i in range(10000000):
+    for i in range(1000):
         if i > 0:
             current_factorial *= i
         term = (x ** i) / current_factorial
         sum += term
     return sum
+e = e(1)
 
 
-print (e(1))
-print (e(10))
-print( e(100) )
-
-def atanpi(x):
+#BROKEN BROKEN BROKEN #BROKEN BROKEN BROKEN #BROKEN BROKEN BROKEN #BROKEN BROKEN BROKEN
+def atanpi(x):   
   return  (x - x**3 / 3 + x**5 / 5 - x**7 / 7 + x**9 / 9 -
               x**11 / 11 + x**13 / 13 - x**15 / 15 +
               x**17 / 17 - x**19 / 19 + x**21 / 21)
+#BROKEN BROKEN BROKEN #BROKEN BROKEN BROKEN #BROKEN BROKEN BROKEN #BROKEN BROKEN BROKEN 
+
+
 
 pi = 4 * (4 * atanpi(1/5) - atanpi(1/239))
-print(pi)
 
 def abs(x):
   if x < 0:
@@ -111,6 +113,7 @@ def acsc(x):
 def acot(x):
   if x == 0:
     return pi / 2
+
   if x < 0:
     return pi - atan(-x)
   if x == float('inf'):
@@ -119,9 +122,17 @@ def acot(x):
     return pi
   return pi / 2 - atan(x)
 
-def derivative(func, x):
-  h = 1e-8
+def derivative(func, x, h=1e-8):
   return (func(x + h) - func(x)) / h
+
+def euler_method(func, x0, y0, h, n):
+  x = x0
+  y = y0
+  b = n / h
+  for i in range(int(b)):
+    y += h * derivative(func, x)
+    x += h
+  return y
 
 def riemann_sum(func, a, b, step_size, mode):
   sum = 0
@@ -142,18 +153,38 @@ def riemann_sum(func, a, b, step_size, mode):
     case "trap":
       while a < b:
         sum += (func(a) + func(a+step_size))/2 * step_size
-        # a += 
-
+        a += step_size
     case _:
       raise ValueError("Invalid mode")
+  return sum
 
 def ln(x):
   if x == 0:
     return(1)
   if x < 0:
     raise ValueError("Log of negative number DNE")
-  
-    
+  return 1e+7*(x**(1e-7))-1e+7
 
-# def integral(func, a, b):
-#   return 
+
+
+def integral(func, a, b, step_size=1e-5):
+  return riemann_sum(func, a, b, step_size, "left")
+
+def zeros(func, a=-100, b=100):
+  return [0,0]
+
+def intersections(func_one, func_two, a=-100, b=100):
+  x_vals = zeros((lambda x : func_one(x) - func_two(x)), a, b)
+  return [[x, func_one(x)] for x in x_vals]
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
+  pp(integral((lambda x : 2*x**2), 0, 10))
+  pp(derivative((lambda x : 3*x+5), 2))
+  pp(ln(1000))

@@ -76,21 +76,6 @@ def acos(x):
     return 0
   return pi / 2 - asin(x)
 
-def atan(x):
-  if x == 0:
-    return 0
-  if x < 0:
-    return -atan(-x)
-  if x == 1:
-    return pi / 4
-  if x == float('inf'):
-    return pi / 2
-  if x == float('-inf'):
-    return -pi / 2
-  return  (x - x**3 / 3 + x**5 / 5 - x**7 / 7 + x**9 / 9 -
-              x**11 / 11 + x**13 / 13 - x**15 / 15 +
-              x**17 / 17 - x**19 / 19 + x**21 / 21)
-
 def asec(x):
   if x < 1 and x > -1:
     raise ValueError("asec: input must be outside the range [-1, 1]")
@@ -168,6 +153,19 @@ def ln(x):
 
 def integral(func, a, b, step_size=1e-5):
   return riemann_sum(func, a, b, step_size, "left")
+
+def atan(x):
+  if x == 0:
+    return 0
+  if x < 0:
+    return -atan(-x)
+  if x == 1:
+    return pi / 4
+  if x == float('inf'):
+    return pi / 2
+  if x == float('-inf'):
+    return -pi / 2
+  return  integral((lambda x: 1/(1+x**2)), 0, x)
 
 def zeros(func, a=-100, b=100):
   return [0,0]

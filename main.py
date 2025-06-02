@@ -11,14 +11,10 @@ def e(x):
     return sum
 e = e(1)
 
-
-#BROKEN BROKEN BROKEN #BROKEN BROKEN BROKEN #BROKEN BROKEN BROKEN #BROKEN BROKEN BROKEN
 def atanpi(x):   
   return  (x - x**3 / 3 + x**5 / 5 - x**7 / 7 + x**9 / 9 -
               x**11 / 11 + x**13 / 13 - x**15 / 15 +
               x**17 / 17 - x**19 / 19 + x**21 / 21)
-#BROKEN BROKEN BROKEN #BROKEN BROKEN BROKEN #BROKEN BROKEN BROKEN #BROKEN BROKEN BROKEN 
-
 
 
 pi = 4 * (4 * atanpi(1/5) - atanpi(1/239))
@@ -32,14 +28,17 @@ def sqrt(x):
   return x**0.5
 
 def sin(theta):
-  if theta > 0:
-    theta %= 2 * pi
-  else:
-    theta %= -2 * pi
-  return (theta - theta**3 / 6 + theta**5 / 120 - theta**7 / 5040 +
-          theta**9 / 362880 - theta**11 / 39916800 + theta**13 / 6227020800 -
-          theta**15 / 1307674368000 + theta**17 / 355687428096000 -
-          theta**19 / 121645100408832000 + theta**21 / 51090942171709440000)
+    theta = theta % (2 * pi)  
+    
+    result = 0
+    for n in range(20):
+        factorial = 1
+        for i in range(1, 2 * n + 2):
+            factorial *= i
+        term = ((-1) ** n) * (theta ** (2 * n + 1)) / factorial
+        result += term
+    
+    return result
 
 def cos(theta):
   return sin(pi / 2 - theta)

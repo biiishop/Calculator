@@ -174,7 +174,19 @@ def intersections(func_one, func_two, a=-100, b=100):
   x_vals = zeros((lambda x : func_one(x) - func_two(x)), a, b)
   return [[x, func_one(x)] for x in x_vals]
 
-
+def newtons_method(func, x0, low_bound, upper_bound, accuracy, max_iter=100):
+  x = x0
+  for i in range(max_iter):
+    if derivative(func, x) == 0:
+      print("Derivative is zero, can't use Newton's method")
+      break
+    if x > upper_bound or x < low_bound:
+      print("There are no zeros on the interval or entered interval wrong")
+      break
+    x_new = x - func(x) / derivative(func, x)
+    if abs(x_new - x) < accuracy:
+      return x_new
+    x = x_new
 
 
 

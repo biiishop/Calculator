@@ -119,6 +119,8 @@ def euler_method(func, x0, y0, h, n):
   return y
 
 def riemann_sum(func, a, b, step_size, mode):
+  if (a-b) % step_size != 0:
+      return ValueError("step_size doesn't divide a-b")
   sum = 0
   if (mode == "left"):
       while a < b:

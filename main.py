@@ -120,27 +120,27 @@ def euler_method(func, x0, y0, h, n):
 
 def riemann_sum(func, a, b, step_size, mode):
   sum = 0
-  match mode:
-    case "left":
+  if (mode == "left"):
       while a < b:
         sum += func(a) * step_size
         a += step_size
-    case "right":
+  elif (mode == "right"):
       a += step_size
       while a < b:
         sum += func(a) * step_size
         a += step_size
-    case "middle":
+  elif (mode == "middle"):
       while a < b:
         a += step_size
         sum += func(a + step_size / 2) * step_size
-    case "trap":
+  elif (mode == "trap"):
       while a < b:
         sum += (func(a) + func(a+step_size))/2 * step_size
         a += step_size
-    case _:
+  else:
       raise ValueError("Invalid mode")
   return sum
+
 
 def ln(x):
   if x == 0:

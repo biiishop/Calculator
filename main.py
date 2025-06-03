@@ -3,7 +3,7 @@ from pprint import pp
 def e(x):
     sum = 0
     current_factorial = 1
-    for i in range(1000):
+    for i in range(50):
         if i > 0:
             current_factorial *= i
         term = (x ** i) / current_factorial

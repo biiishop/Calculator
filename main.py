@@ -150,7 +150,8 @@ def ln(x):
     raise ValueError("Log of negative number DNE")
   return 1e+7*(x**(1e-7))-1e+7
 
-
+def logb(b, x):
+  return (ln(x)/ln(b))
 
 def integral(func, a, b, step_size=1e-5):
   return riemann_sum(func, a, b, step_size, "left")

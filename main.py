@@ -127,13 +127,13 @@ def riemann_sum(func, a, b, step_size, mode):
         a += step_size
   elif (mode == "right"):
       a += step_size
-      while a < b:
+      while a <= b:
         sum += func(a) * step_size
         a += step_size
   elif (mode == "middle"):
       while a < b:
-        a += step_size
         sum += func(a + step_size / 2) * step_size
+        a += step_size
   elif (mode == "trap"):
       while a < b:
         sum += (func(a) + func(a+step_size))/2 * step_size

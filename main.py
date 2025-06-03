@@ -9,7 +9,6 @@ def e(x):
         term = (x ** i) / current_factorial
         sum += term
     return sum
-e = e(1)
 
 def atanpi(x):   
   return  (x - x**3 / 3 + x**5 / 5 - x**7 / 7 + x**9 / 9 -

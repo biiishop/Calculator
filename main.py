@@ -167,13 +167,6 @@ def atan(x):
     return -pi / 2
   return  integral((lambda x: 1/(1+x**2)), 0, x)
 
-def zeros(func, a=-100, b=100):
-  return [0,0]
-
-def intersections(func_one, func_two, a=-100, b=100):
-  x_vals = zeros((lambda x : func_one(x) - func_two(x)), a, b)
-  return [[x, func_one(x)] for x in x_vals]
-
 def newtons_method(func, x0, low_bound, upper_bound, accuracy, max_iter=100):
   x = x0
   for i in range(max_iter):
@@ -187,6 +180,10 @@ def newtons_method(func, x0, low_bound, upper_bound, accuracy, max_iter=100):
     if abs(x_new - x) < accuracy:
       return x_new
     x = x_new
+
+def intersections(func_one, func_two, guess, a=-100, b=100):
+  x = newtons_method((lambda x : func_one(x) - func_two(x)), guess, a, b, 0.001)
+  return [x, func_one(x)]
 
 
 

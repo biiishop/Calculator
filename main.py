@@ -118,26 +118,28 @@ def euler_method(func, x0, y0, h, n):
   return y
 
 def riemann_sum(func, a, b, step_size, mode):
-  if (a-b) % step_size != 0:
-      return ValueError("step_size doesn't divide a-b")
   sum = 0
   if (mode == "left"):
-      while a < b:
-        sum += func(a) * step_size
-        a += step_size
+      while a < b - step_size * 0.001:
+        width = min(step_size, b - a)
+        sum += func(a) * width
+        a += width
   elif (mode == "right"):
       a += step_size
-      while a <= b:
-        sum += func(a) * step_size
-        a += step_size
+      while a <= b - step_size * 0.001:
+        width = min(step_size, b - a)
+        sum += func(a) * width
+        a += width
   elif (mode == "middle"):
-      while a < b:
-        sum += func(a + step_size / 2) * step_size
-        a += step_size
+      while a < b - step_size * 0.001:
+        width = min(step_size, b - a)
+        sum += func(a + width / 2) * width
+        a += width
   elif (mode == "trap"):
-      while a < b:
-        sum += (func(a) + func(a+step_size))/2 * step_size
-        a += step_size
+      while a < b - step_size * 0.001:
+        width = min(step_size, b - a)
+        sum += (func(a) + func(a+width))/2 * width
+        a += width
   else:
       raise ValueError("Invalid mode")
   return sum

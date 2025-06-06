@@ -27,17 +27,26 @@ def sqrt(x):
   return x**0.5
 
 def sin(theta):
-    theta = theta % (2 * pi)  
+    SIGN = 0
+    theta = theta % (2 * pi)  # [0, 2pi]
+
+    if theta > pi: #[0, pi]
+       SIGN = -1 
+       theta = theta - pi
+    else :
+       SIGN = 1
+    if theta > pi/2: 
+      theta = pi - theta
     
     result = 0
-    for n in range(20):
+    for n in range(7):
         factorial = 1
         for i in range(1, 2 * n + 2):
             factorial *= i
         term = ((-1) ** n) * (theta ** (2 * n + 1)) / factorial
         result += term
     
-    return result
+    return (SIGN * result)
 
 def cos(theta):
   return sin(pi / 2 - theta)
